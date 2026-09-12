@@ -44,12 +44,8 @@ export function createPhotobooth(root) {
       root.innerHTML = `
         <div class="photobooth-stage scene-camera">
           <div class="booth-scene" aria-label="Wedding invitation reveal">
-            <img
-              class="booth-scene__background"
-              src="./photobooth/assets/images/booth/background.png"
-              alt=""
-              aria-hidden="true"
-            />
+            <div class="curtain curtain--left" aria-hidden="true"></div>
+            <div class="curtain curtain--right" aria-hidden="true"></div>
 
             <section class="booth" aria-labelledby="couple-name">
               <img
@@ -88,6 +84,20 @@ export function createPhotobooth(root) {
         playButtonPressSound();
         status.textContent = 'Photo reveal started.';
         revealPhoto(root);
+
+        // At 5 seconds, begin a slow five-second transition out of the booth.
+        window.setTimeout(() => {
+          root.dataset.state = 'transitioning';
+          root.classList.add('is-transitioning');
+          status.textContent = 'The scene is changing.';
+        }, 5000);
+
+        // At 10 seconds, open the velvet curtains and reveal the next scene.
+        window.setTimeout(() => {
+          root.dataset.state = 'curtain-opening';
+          root.classList.add('is-curtain-opening');
+          status.textContent = 'The curtains are opening.';
+        }, 10000);
 
         window.setTimeout(() => {
           photo?.classList.add('is-settled');
