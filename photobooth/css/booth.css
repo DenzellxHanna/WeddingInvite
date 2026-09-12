@@ -1,123 +1,93 @@
-/* The stage is a camera frame, not a centered page component. */
+/* The booth is a compact physical object inside a larger scene. */
 .booth {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  background: var(--ivory);
+  position: relative;
+  display: grid;
+  width: min(72vw, 30rem);
+  height: min(82svh, 48rem);
+  place-items: center;
+  overflow: visible;
+  isolation: isolate;
 }
 
-.booth__scene,
+.booth__scene {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
 .booth__product {
   display: block;
   width: 100%;
   height: 100%;
-}
-
-.booth__product {
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   user-select: none;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 1.6rem 1.7rem rgb(0 0 0 / 38%));
 }
 
-/* Live copy is positioned over the actual glass display, per camera framing. */
+/* These are interaction anchors. The artwork supplies the physical hardware. */
 .booth__display {
   position: absolute;
-  top: 11.7%;
-  left: 45.5%;
-  display: grid;
-  width: 28.8%;
-  height: 19%;
-  place-content: center;
-  padding: 0.8rem;
-  text-align: center;
-  color: var(--ivory);
-  text-shadow: 0 0.1rem 0.6rem rgb(0 0 0 / 75%);
+  top: 23%;
+  left: 50%;
+  width: 32%;
+  height: 18%;
+  transform: translateX(-50%);
   pointer-events: none;
+  opacity: 0;
 }
 
-.booth h1 {
-  max-width: 10ch;
-  margin: 0;
-  font-size: clamp(0.95rem, 4vw, 1.45rem);
-  font-weight: 400;
-  line-height: 0.95;
-  letter-spacing: -0.04em;
-}
-
-.booth h1 span { color: var(--champagne); font-style: italic; }
-
+.booth__display h1,
 .booth__display-line {
-  width: 1.8rem;
-  height: 1px;
-  margin: 0.5rem auto 0;
-  background: var(--champagne);
-  box-shadow: 0 0 0.35rem rgb(216 194 157 / 65%);
+  display: none;
 }
 
-/* The click target maps to the mounted metal start button in the scene. */
 .booth__controls {
   position: absolute;
-  top: 31.2%;
-  left: 54%;
+  top: 43%;
+  left: 50%;
+  width: 26%;
+  height: 13%;
+  transform: translateX(-50%);
   display: grid;
-  width: 14%;
-  height: 10%;
   place-items: center;
+  z-index: 3;
 }
 
 .booth__start {
-  position: relative;
-  width: 42%;
-  min-width: 2.4rem;
-  aspect-ratio: 1;
+  width: 70%;
+  height: 70%;
   border: 0;
   border-radius: 50%;
   background: transparent;
   cursor: pointer;
+  opacity: 0;
 }
 
 .booth__start span {
-  position: absolute;
-  top: calc(100% + 0.35rem);
-  left: 50%;
-  width: max-content;
-  padding: 0.28rem 0.5rem;
-  border: 1px solid rgb(216 194 157 / 70%);
-  border-radius: 0.2rem;
-  color: var(--ivory);
-  background: rgb(36 59 90 / 78%);
-  box-shadow: 0 0.2rem 0.45rem rgb(0 0 0 / 25%);
-  transform: translateX(-50%);
-  font-family: var(--font-accent);
-  font-size: clamp(0.4rem, 0.9vw, 0.52rem);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  white-space: nowrap;
+  display: none;
 }
 
 .booth__start:focus-visible {
-  outline: 3px solid var(--burgundy);
-  outline-offset: 0.22rem;
+  outline: 2px solid var(--champagne);
+  outline-offset: 0.25rem;
+  opacity: 0.9;
 }
 
 .booth__start:active { transform: translateY(0.1rem); }
-[data-state='ready'] .booth__start span { background: var(--burgundy); }
+
+@media (max-width: 47.99rem) {
+  .booth {
+    width: min(78vw, 24rem);
+    height: min(78svh, 38rem);
+  }
+}
 
 @media (min-width: 48rem) {
-  .booth__display {
-    top: 23.8%;
-    left: 35.9%;
-    width: 9.6%;
-    height: 15.8%;
-  }
-
-  .booth h1 { font-size: clamp(1rem, 1.55vw, 1.55rem); }
-
-  .booth__controls {
-    top: 38.5%;
-    left: 37.2%;
-    width: 8%;
-    height: 10%;
+  .booth {
+    width: min(30vw, 27rem);
+    height: min(78svh, 44rem);
   }
 }
