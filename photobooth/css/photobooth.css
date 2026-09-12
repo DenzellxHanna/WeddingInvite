@@ -1,2 +1,37 @@
 /* Photobooth layout and local state styles only. */
-#photobooth-root[data-system='photobooth'] { min-height: 100vh; }
+#photobooth-root[data-system='photobooth'] {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.photobooth-stage {
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  padding: clamp(1.5rem, 5vw, 4rem) 1rem;
+  isolation: isolate;
+}
+
+.photobooth-stage::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 28%, rgb(255 255 255 / 55%), transparent 35rem),
+    radial-gradient(ellipse at center, transparent 45%, rgb(114 47 62 / 7%) 130%);
+  content: '';
+}
+
+.photobooth-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (min-width: 48rem) {
+  .photobooth-stage { min-height: 100dvh; }
+}

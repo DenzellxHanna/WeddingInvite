@@ -1,1 +1,46 @@
-/* Printer slot and output track. */
+/* Printer housing, physical output slot, and future photo track. */
+.printer {
+  padding: 0 1rem 1rem;
+  background: linear-gradient(155deg, #d8c29d, #b99e6b);
+}
+
+.printer__housing {
+  position: relative;
+  padding: 1.25rem 1.15rem 1.15rem;
+  border: 1px solid rgb(255 255 255 / 48%);
+  border-radius: 0.85rem;
+  background: linear-gradient(160deg, #eee7db, #c5c7c5);
+  box-shadow: inset 0 0.18rem 0.55rem rgb(36 59 90 / 14%), 0 0.25rem 0.45rem rgb(36 59 90 / 15%);
+}
+
+.printer__indicator {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.7rem;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--burgundy);
+  box-shadow: 0 0 0.3rem rgb(114 47 62 / 45%);
+}
+
+.printer__slot {
+  position: relative;
+  display: grid;
+  min-height: 2.7rem;
+  place-items: start center;
+  overflow: visible;
+  border: 0.32rem solid #485565;
+  border-radius: 0.5rem;
+  background: linear-gradient(180deg, #101b29, #263c53 26%, #0b111a);
+  box-shadow: inset 0 0.32rem 0.5rem rgb(0 0 0 / 65%), 0 1px 0 rgb(255 255 255 / 62%);
+}
+
+.printer__slot-shadow {
+  position: absolute;
+  inset: 0.25rem 0.5rem auto;
+  height: 0.3rem;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 55%);
+  filter: blur(0.2rem);
+}

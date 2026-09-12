@@ -1,1 +1,7 @@
-/* Reserved for physical booth motion; no final animation is implemented yet. */
+/*
+ * Reserved for physical button, printer, and photo motion. The static stage
+ * deliberately contains no simulated printing or photo-emergence animation.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+}
