@@ -16,17 +16,17 @@ export function createPhotobooth(root) {
               />
               <img
                 class="booth__product"
-                src="./photobooth/assets/images/booth/photorealistic-wedding-photobooth.png"
-                alt="Classic wedding photobooth with a glass display and integrated photo printer"
+                src="./photobooth/assets/images/booth/photobooth-scene-desktop.png"
+                alt="Classic vintage photobooth with an integrated photo printer"
               />
             </picture>
-            <header class="booth__display">
+            <header class="booth__display" aria-hidden="true">
               <h1 id="couple-name">Denzell <span>&amp;</span> Hanna</h1>
               <div class="booth__display-line" aria-hidden="true"></div>
             </header>
 
             <div class="booth__controls">
-              <button class="booth__start" type="button" aria-pressed="false">
+              <button class="booth__start" type="button" aria-label="Press to start the photobooth" aria-pressed="false">
                 <span>Press to Start</span>
               </button>
             </div>
