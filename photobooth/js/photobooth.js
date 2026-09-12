@@ -44,6 +44,13 @@ export function createPhotobooth(root) {
       root.innerHTML = `
         <div class="photobooth-stage scene-camera">
           <div class="booth-scene" aria-label="Wedding invitation reveal">
+            <img
+              class="booth-scene__background"
+              src="./photobooth/assets/images/booth/background.png"
+              alt=""
+              aria-hidden="true"
+            />
+
             <section class="booth" aria-labelledby="couple-name">
               <img
                 class="booth__artwork"
