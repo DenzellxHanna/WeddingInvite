@@ -1,6 +1,6 @@
-/* Photobooth layout and local state styles only. */
+/* The landing page is a physical scene, not a centered website card. */
 #photobooth-root[data-system='photobooth'] {
-  min-height: 100vh;
+  min-height: 100svh;
   overflow: hidden;
 }
 
@@ -9,8 +9,12 @@
   display: grid;
   min-height: 100svh;
   place-items: center;
-  padding: clamp(1.5rem, 5vw, 4rem) 1rem;
+  overflow: hidden;
   isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 43%, rgb(216 194 157 / 14%), transparent 30rem),
+    radial-gradient(circle at 50% 52%, rgb(36 59 90 / 24%), transparent 46rem),
+    linear-gradient(180deg, #111820 0%, #182331 52%, #0d131b 100%);
 }
 
 .photobooth-stage::before {
@@ -18,9 +22,10 @@
   z-index: -1;
   inset: 0;
   background:
-    radial-gradient(circle at 50% 28%, rgb(255 255 255 / 55%), transparent 35rem),
-    radial-gradient(ellipse at center, transparent 45%, rgb(114 47 62 / 7%) 130%);
+    radial-gradient(ellipse at center, transparent 40%, rgb(0 0 0 / 42%) 100%),
+    linear-gradient(180deg, transparent 72%, rgb(0 0 0 / 28%) 100%);
   content: '';
+  pointer-events: none;
 }
 
 .photobooth-status {
