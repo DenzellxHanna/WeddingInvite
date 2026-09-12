@@ -6,43 +6,87 @@
 .photobooth-stage {
   position: relative;
   min-height: 100svh;
+  height: 100dvh;
   overflow: hidden;
   isolation: isolate;
-  background: #e9d6bd;
+  background:
+    radial-gradient(ellipse at 50% 46%, rgb(132 36 54 / 72%) 0%, rgb(105 24 40 / 50%) 30%, transparent 62%),
+    radial-gradient(ellipse at 50% 115%, rgb(30 5 12 / 70%) 0%, transparent 58%),
+    linear-gradient(135deg, #3f0d19 0%, #641b2b 42%, #4b101f 72%, #260710 100%);
+}
+
+.photobooth-stage::before {
+  position: absolute;
+  inset: -15%;
+  z-index: -2;
+  content: '';
+  pointer-events: none;
+  opacity: 0.7;
+  background:
+    radial-gradient(ellipse at 18% 40%, rgb(255 220 210 / 8%) 0%, transparent 18%),
+    radial-gradient(ellipse at 82% 38%, rgb(255 220 210 / 7%) 0%, transparent 20%),
+    repeating-linear-gradient(102deg, rgb(255 255 255 / 2%) 0 7%, transparent 7% 17%);
+  filter: blur(2px);
+  transform: scale(1.08);
+}
+
+.photobooth-stage::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: '';
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 40%, rgb(20 4 9 / 38%) 100%);
 }
 
 .booth-scene {
   position: relative;
   display: grid;
   width: 100%;
+  height: 100%;
   min-height: 100svh;
   place-items: center;
   overflow: hidden;
+  padding:
+    max(0.75rem, env(safe-area-inset-top))
+    max(0.75rem, env(safe-area-inset-right))
+    max(0.75rem, env(safe-area-inset-bottom))
+    max(0.75rem, env(safe-area-inset-left));
 }
 
+/* The background is now CSS-driven so the hero stays lightweight and crops cleanly on phones. */
 .booth-scene__background {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-.booth-scene::after {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  content: '';
-  pointer-events: none;
-  background: radial-gradient(ellipse at center, transparent 45%, rgb(38 23 18 / 12%) 100%);
+  display: none;
 }
 
 @media (max-width: 48rem) {
-  .booth-scene__background { object-position: center center; }
+  #photobooth-root[data-system='photobooth'],
+  .photobooth-stage,
+  .booth-scene {
+    min-height: 100dvh;
+  }
+
+  .booth-scene {
+    align-items: center;
+    justify-items: center;
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+
+  .photobooth-stage::before {
+    opacity: 0.55;
+  }
+
+  .photobooth-stage::after {
+    background: radial-gradient(ellipse at center, transparent 34%, rgb(20 4 9 / 32%) 100%);
+  }
+}
+
+@media (max-width: 48rem) and (orientation: landscape) {
+  .booth-scene {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
 }
 
 .photobooth-status {
