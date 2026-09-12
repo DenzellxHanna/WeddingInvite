@@ -1,12 +1,10 @@
-/*
- * The approved photorealistic artwork is the visual product. CSS is only used
- * for interaction layers that must remain functional.
- */
+/* The approved booth artwork is a real image; CSS only handles interaction layers. */
 .booth {
   position: relative;
-  width: min(96vw, 72rem);
-  aspect-ratio: 1.5 / 1;
+  width: min(94vw, 1100px, calc(88svh * 760 / 671));
+  aspect-ratio: 760 / 671;
   isolation: isolate;
+  filter: drop-shadow(0 1.5rem 2.5rem rgb(42 27 20 / 30%));
 }
 
 .booth__artwork {
@@ -18,15 +16,14 @@
   object-fit: contain;
   user-select: none;
   -webkit-user-drag: none;
-  filter: drop-shadow(0 1.2rem 2rem rgb(30 20 16 / 24%));
 }
 
 /* Transparent hit target aligned to the physical gold button in the artwork. */
 .booth__start {
   position: absolute;
-  top: 69.5%;
-  left: 30.1%;
-  width: 10.5%;
+  top: 69.8%;
+  left: 21.5%;
+  width: 12%;
   aspect-ratio: 1;
   padding: 0;
   border: 0;
@@ -38,35 +35,36 @@
 
 .booth__start:hover { transform: translateY(-1px); }
 .booth__start:active,
-.booth__start.is-pressed { transform: translateY(0.18rem) scale(0.96); }
+.booth__start.is-pressed { transform: translateY(0.2rem) scale(0.95); }
 
 .booth__start:focus-visible {
   outline: 2px solid var(--champagne);
   outline-offset: 0.35rem;
 }
 
-/* The photo begins at the physical top slot and travels downward into the navy panel. */
+/* The photo enters through the physical slot at the top of the navy panel. */
 .booth__photo-mask {
   position: absolute;
   top: 17.2%;
-  left: 50.3%;
-  width: 34.2%;
-  height: 68%;
+  left: 50.8%;
+  width: 36%;
+  height: 67%;
   overflow: hidden;
   pointer-events: none;
 }
 
 .revealed-photo {
   position: absolute;
-  top: -23%;
+  top: -20%;
   left: 50%;
-  width: 19%;
-  min-width: 4.5rem;
+  width: 34%;
+  min-width: 5rem;
   aspect-ratio: 0.72 / 1;
+  padding: 0.22rem;
+  border: 1px solid #e6dac8;
+  background: #fffdf8;
+  box-shadow: 0 0.55rem 0.9rem rgb(0 0 0 / 38%);
   transform: translate(-50%, -100%);
-  border: 0.18rem solid #f5efe4;
-  background: #f7f3eb;
-  box-shadow: 0 0.45rem 0.8rem rgb(0 0 0 / 35%);
   opacity: 0;
   transition:
     top 1.25s cubic-bezier(0.2, 0.72, 0.25, 1),
@@ -75,7 +73,7 @@
 }
 
 .revealed-photo.is-emerging {
-  top: 63%;
+  top: 64%;
   transform: translate(-50%, -50%);
   opacity: 1;
 }
@@ -87,11 +85,10 @@
   width: 100%;
   height: 78%;
   place-items: center;
-  background:
-    linear-gradient(135deg, #d7d0c5 25%, #eee9df 25% 50%, #c6beb2 50% 75%, #e6e0d5 75%);
+  background: linear-gradient(135deg, #d7d0c5, #eee9df 50%, #c6beb2);
   color: #5f554a;
-  font: 600 clamp(0.45rem, 1.2vw, 0.8rem)/1 var(--font-accent);
-  letter-spacing: 0.16em;
+  font: 600 clamp(0.45rem, 1.1vw, 0.75rem)/1 var(--font-accent);
+  letter-spacing: 0.12em;
 }
 
 .revealed-photo__caption {
@@ -99,8 +96,8 @@
   height: 22%;
   place-items: center;
   color: var(--burgundy);
-  font: 500 clamp(0.3rem, 0.8vw, 0.55rem)/1 var(--font-accent);
-  letter-spacing: 0.12em;
+  font: 500 clamp(0.3rem, 0.75vw, 0.52rem)/1 var(--font-accent);
+  letter-spacing: 0.1em;
 }
 
 .booth__sr-only,
@@ -117,11 +114,25 @@
 }
 
 @media (max-width: 48rem) {
-  .booth { width: 100vw; }
-  .booth__start { width: 11.5%; top: 69.2%; left: 29.8%; }
-  .booth__photo-mask { top: 17.5%; left: 50.4%; width: 34%; height: 67%; }
+  .booth {
+    width: min(96vw, calc(88dvh * 760 / 671));
+  }
+
+  .booth__start {
+    top: 69.8%;
+    left: 21.5%;
+    width: 13%;
+  }
+
+  .booth__photo-mask {
+    top: 17.2%;
+    left: 50.8%;
+    width: 36%;
+    height: 67%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .booth__start, .revealed-photo { transition: none; }
+  .booth__start,
+  .revealed-photo { transition: none; }
 }
