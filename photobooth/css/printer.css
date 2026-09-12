@@ -1,10 +1,10 @@
-/* Future print motion is anchored over the scene's real paper aperture. */
+/* Transparent anchor for the future physical photo emergence. */
 .printer {
   position: absolute;
-  top: 54.2%;
-  left: 46.4%;
-  width: 24.8%;
-  height: 15.4%;
+  top: 61%;
+  left: 27%;
+  width: 24%;
+  height: 16%;
   pointer-events: none;
 }
 
@@ -15,11 +15,11 @@
   height: 100%;
 }
 
-@media (min-width: 48rem) {
+@media (max-width: 47.99rem) {
   .printer {
-    top: 60.8%;
-    left: 37%;
-    width: 7.7%;
-    height: 11.2%;
+    top: 61%;
+    left: 27%;
+    width: 24%;
+    height: 16%;
   }
 }
