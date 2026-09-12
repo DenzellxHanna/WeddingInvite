@@ -2,14 +2,15 @@
 .printed-photo {
   position: absolute;
   z-index: 1;
-  top: 0.35rem;
-  width: min(54%, 9rem);
+  top: 11%;
+  left: 50%;
+  width: 54%;
   aspect-ratio: 4 / 5;
   padding: 0.35rem;
   border: 1px solid rgb(36 59 90 / 18%);
   background: #fffdf8;
   box-shadow: 0 0.65rem 0.85rem rgb(36 59 90 / 22%);
-  transform: rotate(-1.5deg);
+  transform: translateX(-50%) rotate(-1.5deg);
 }
 
 .printed-photo__image {

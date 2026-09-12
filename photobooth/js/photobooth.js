@@ -9,28 +9,29 @@ export function createPhotobooth(root) {
       root.innerHTML = `
         <div class="photobooth-stage">
           <section class="booth" aria-labelledby="couple-name">
-            <div class="booth__crown" aria-hidden="true"></div>
-            <div class="booth__frame">
-              <header class="booth__display">
-                <h1 id="couple-name">Denzell <span>&amp;</span> Hanna</h1>
-                <div class="booth__display-line" aria-hidden="true"></div>
-              </header>
+            <img
+              class="booth__product"
+              src="./photobooth/assets/images/booth/photorealistic-wedding-photobooth.png"
+              alt="Premium ivory wedding photobooth with a glass display and integrated photo printer"
+            />
+            <header class="booth__display">
+              <h1 id="couple-name">Denzell <span>&amp;</span> Hanna</h1>
+              <div class="booth__display-line" aria-hidden="true"></div>
+            </header>
 
-              <div class="booth__controls">
-                <button class="booth__start" type="button" aria-pressed="false">
-                  <span>Press to Start</span>
-                </button>
-              </div>
+            <div class="booth__controls">
+              <button class="booth__start" type="button" aria-pressed="false">
+                <span>Press to Start</span>
+              </button>
+            </div>
 
-              <div class="printer" aria-label="Photo printer">
-                <div class="printer__housing">
-                  <span class="printer__indicator" aria-hidden="true"></span>
-                  <div class="printer__slot" aria-label="Photo output slot">
-                    <span class="printer__slot-shadow" aria-hidden="true"></span>
-                    <article class="printed-photo" aria-label="Test photo placeholder" hidden>
-                      <div class="printed-photo__image">Test Photo</div>
-                    </article>
-                  </div>
+            <!-- Transparent anchor aligned to the physical printer aperture. -->
+            <div class="printer" aria-label="Photo printer">
+              <div class="printer__housing">
+                <div class="printer__slot" aria-label="Photo output slot">
+                  <article class="printed-photo" aria-label="Test photo placeholder" hidden>
+                    <div class="printed-photo__image">Test Photo</div>
+                  </article>
                 </div>
               </div>
             </div>
