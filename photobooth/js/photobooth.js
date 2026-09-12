@@ -1,9 +1,42 @@
-import { setBoothState } from './animations.js';
-import { photoboothCopy } from './config.js';
+import { revealPhoto } from './animations.js';
 
-const lines = (items, className) => items.map((item) => `<span class="${className}">${item}</span>`).join('');
+/** Play a short camera/shutter-style sound without requiring an audio asset. */
+function playRevealSound() {
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContext) return;
 
-/** Public entry point for the photobooth system. */
+  const context = new AudioContext();
+  const now = context.currentTime;
+  const gain = context.createGain();
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.exponentialRampToValueAtTime(0.22, now + 0.012);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+  gain.connect(context.destination);
+
+  const click = context.createOscillator();
+  click.type = 'square';
+  click.frequency.setValueAtTime(980, now);
+  click.frequency.exponentialRampToValueAtTime(170, now + 0.055);
+  click.connect(gain);
+  click.start(now);
+  click.stop(now + 0.06);
+
+  const body = context.createOscillator();
+  const bodyGain = context.createGain();
+  body.type = 'triangle';
+  body.frequency.setValueAtTime(120, now + 0.035);
+  body.frequency.exponentialRampToValueAtTime(55, now + 0.16);
+  bodyGain.gain.setValueAtTime(0.0001, now + 0.035);
+  bodyGain.gain.exponentialRampToValueAtTime(0.12, now + 0.045);
+  bodyGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
+  body.connect(bodyGain).connect(context.destination);
+  body.start(now + 0.035);
+  body.stop(now + 0.21);
+
+  window.setTimeout(() => context.close(), 300);
+}
+
+/** Public entry point for the photobooth landing interaction. */
 export function createPhotobooth(root) {
   return {
     mount() {
@@ -12,58 +45,46 @@ export function createPhotobooth(root) {
       root.innerHTML = `
         <div class="photobooth-stage scene-camera">
           <section class="booth" aria-labelledby="couple-name">
-            <div class="booth__frame">
-              <div class="booth__ornament booth__ornament--tl" aria-hidden="true"></div>
-              <div class="booth__ornament booth__ornament--tr" aria-hidden="true"></div>
-              <div class="booth__ornament booth__ornament--bl" aria-hidden="true"></div>
-              <div class="booth__ornament booth__ornament--br" aria-hidden="true"></div>
+            <img
+              class="booth__artwork"
+              src="./photobooth/assets/images/booth/Denzell-Hanna-landing-page.png"
+              alt="Elegant burgundy, navy and champagne wedding invitation display surrounded by flowers"
+            />
 
-              <div class="booth__inner">
-                <div class="booth__instruction">
-                  <p class="booth__eyebrow">${photoboothCopy.eyebrow}</p>
-                  <div class="booth__initials" aria-hidden="true">
-                    <span>${photoboothCopy.initials[0]}</span>
-                    <i>/</i>
-                    <span>${photoboothCopy.initials[1]}</span>
-                  </div>
-                  <span class="booth__rule" aria-hidden="true"></span>
-                  <p class="booth__prompt">${lines(photoboothCopy.action, 'booth__prompt-line')}</p>
-                  <button class="booth__start" type="button" aria-label="${photoboothCopy.buttonLabel}">
-                    <span class="booth__button-core"></span>
-                  </button>
-                  <p class="booth__footer">${lines(photoboothCopy.footer, 'booth__footer-line')}</p>
-                </div>
+            <button
+              class="booth__start"
+              type="button"
+              aria-label="Press to reveal the wedding invitation"
+            ></button>
 
-                <div class="booth__window" aria-label="Invitation display">
-                  <div class="booth__window-content">
-                    <p class="booth__window-title">${lines(photoboothCopy.windowTitle, 'booth__window-title-line')}</p>
-                    <span class="booth__window-rule" aria-hidden="true"></span>
-                    <p class="booth__date">${photoboothCopy.date}</p>
-                  </div>
-                  <div class="booth__photo-slot" aria-hidden="true">
-                    <span class="booth__slot-shadow"></span>
-                  </div>
-                </div>
+            <div class="booth__photo-mask" aria-hidden="true">
+              <div class="revealed-photo" hidden>
+                <div class="revealed-photo__image">PHOTO</div>
+                <div class="revealed-photo__caption">PLACEHOLDER</div>
               </div>
             </div>
+
             <h1 id="couple-name" class="booth__sr-only">Denzell &amp; Hanna</h1>
-            <div class="printer" aria-hidden="true">
-              <div class="printer__housing">
-                <div class="printer__slot"></div>
-              </div>
-            </div>
           </section>
           <p class="photobooth-status" aria-live="polite"></p>
         </div>
       `;
 
       const startButton = root.querySelector('.booth__start');
+      const photo = root.querySelector('.revealed-photo');
       const status = root.querySelector('.photobooth-status');
+
       startButton.addEventListener('click', () => {
         if (root.dataset.state !== 'idle') return;
+
         startButton.classList.add('is-pressed');
-        setBoothState(root, 'ready');
-        status.textContent = 'Invitation reveal started.';
+        playRevealSound();
+        status.textContent = 'Photo reveal started.';
+        revealPhoto(root);
+
+        window.setTimeout(() => {
+          photo?.classList.add('is-settled');
+        }, 1250);
       });
     },
   };
