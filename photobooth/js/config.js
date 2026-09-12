@@ -1,13 +1,13 @@
 /**
- * Edit the landing-page copy here without touching the component markup.
- * Keep line breaks as arrays so the layout remains responsive.
+ * Editable landing-page copy.
+ * Replace these placeholders later without changing the component markup.
  */
 export const photoboothCopy = {
-  eyebrow: 'THE WEDDING OF',
-  initials: ['D', 'H'],
+  eyebrow: 'PLACEHOLDER',
+  initials: ['X', 'X'],
   action: ['PRESS', 'TO', 'REVEAL'],
-  footer: ['A NEW CHAPTER', 'TOGETHER'],
-  windowTitle: ['SAME LOVE', 'BRIGHTER DAYS'],
-  date: '11 . 24 . 2028',
+  footer: ['PLACEHOLDER', 'PLACEHOLDER'],
+  windowTitle: ['PLACEHOLDER', 'PLACEHOLDER'],
+  date: '00 . 00 . 0000',
   buttonLabel: 'Press to reveal the wedding invitation',
 };
