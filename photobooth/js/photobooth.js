@@ -7,13 +7,19 @@ export function createPhotobooth(root) {
       root.dataset.system = 'photobooth';
       root.dataset.state = 'idle';
       root.innerHTML = `
-        <div class="photobooth-stage">
+        <div class="photobooth-stage scene-camera">
           <section class="booth" aria-labelledby="couple-name">
-            <img
-              class="booth__product"
-              src="./photobooth/assets/images/booth/photorealistic-wedding-photobooth.png"
-              alt="Premium ivory wedding photobooth with a glass display and integrated photo printer"
-            />
+            <picture class="booth__scene">
+              <source
+                media="(min-width: 48rem)"
+                srcset="./photobooth/assets/images/booth/photobooth-scene-desktop.png"
+              />
+              <img
+                class="booth__product"
+                src="./photobooth/assets/images/booth/photorealistic-wedding-photobooth.png"
+                alt="Classic wedding photobooth with a glass display and integrated photo printer"
+              />
+            </picture>
             <header class="booth__display">
               <h1 id="couple-name">Denzell <span>&amp;</span> Hanna</h1>
               <div class="booth__display-line" aria-hidden="true"></div>
