@@ -1,0 +1,19 @@
+name: Static site validation
+
+on:
+  pull_request:
+  push:
+    branches: [main, feature]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify required entry points
+        run: |
+          test -f index.html
+          test -f main.js
+          test -f shared/css/variables.css
+          test -f photobooth/js/photobooth.js
+          test -f album/js/album.js

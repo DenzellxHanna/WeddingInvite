@@ -1,0 +1,3 @@
+/* Mobile-first shared layout tokens. Component breakpoints stay with their system. */
+#invitation { min-height: 100vh; }
+@media (min-width: 48rem) { #invitation { min-height: 100dvh; } }

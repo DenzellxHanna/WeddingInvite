@@ -1,0 +1,2 @@
+/* Photobooth layout and local state styles only. */
+#photobooth-root[data-system='photobooth'] { min-height: 100vh; }

@@ -1,0 +1,5 @@
+body {
+  background: var(--ivory);
+  color: var(--navy);
+  font-family: var(--font-primary);
+}

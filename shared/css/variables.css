@@ -1,0 +1,14 @@
+:root {
+  --burgundy: #722F3E;
+  --navy: #243B5A;
+  --light-gray: #D9DCE1;
+  --champagne: #D8C29D;
+  --ivory: #F3F0E9;
+
+  --font-primary: Georgia, 'Times New Roman', serif;
+  --font-accent: 'Helvetica Neue', Arial, sans-serif;
+  --content-max-width: 120rem;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+}

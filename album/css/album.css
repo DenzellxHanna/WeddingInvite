@@ -1,0 +1,2 @@
+/* Album composition and local states. */
+#album-root[data-system='album'] { min-height: 100vh; }
