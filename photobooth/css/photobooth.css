@@ -9,7 +9,7 @@
   height: 100dvh;
   overflow: hidden;
   isolation: isolate;
-  background: #3f0d19;
+  background: #e8dfd0;
 }
 
 .booth-scene {
@@ -27,32 +27,88 @@
     max(0.75rem, env(safe-area-inset-left));
 }
 
-/* The uploaded velvet curtain is the real landing-page background. */
-.booth-scene__background {
+/*
+ * The uploaded velvet artwork is split into two physical curtain panels.
+ * Each panel uses its own half of the same image so the center seam remains
+ * continuous before the opening animation begins.
+ */
+.curtain {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 50%;
+  pointer-events: none;
+  background-image: url('../assets/images/booth/background.png');
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  transition: transform 5s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+
+.curtain--left {
+  left: 0;
+  background-position: left center;
+  transform-origin: left center;
+}
+
+.curtain--right {
+  right: 0;
+  background-position: right center;
+  transform-origin: right center;
+}
+
+/* Beige placeholder scene revealed behind the curtains. */
+.booth-scene::before {
   position: absolute;
   inset: 0;
   z-index: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  user-select: none;
-  -webkit-user-drag: none;
+  content: '';
+  background:
+    radial-gradient(circle at 50% 45%, rgb(255 252 244 / 65%), transparent 48%),
+    linear-gradient(135deg, #eee7da, #e4d8c7);
 }
 
-/* Very subtle vignette only; it does not replace or tint the uploaded artwork. */
+/* Keep the booth above the curtains until its five-second exit is complete. */
+.booth {
+  position: relative;
+  z-index: 2;
+  transition:
+    opacity 5s ease,
+    transform 5s cubic-bezier(0.2, 0.65, 0.25, 1),
+    filter 5s ease;
+}
+
+/* From second 5 to second 10: slowly recede and disappear. */
+#photobooth-root.is-transitioning .booth {
+  opacity: 0;
+  transform: translateY(-3%) scale(0.92);
+  filter: blur(2px);
+}
+
+/* At second 10, the two velvet panels physically part to expose the beige scene. */
+#photobooth-root.is-curtain-opening .curtain--left {
+  transform: translateX(-100%);
+}
+
+#photobooth-root.is-curtain-opening .curtain--right {
+  transform: translateX(100%);
+}
+
+/* Slightly soften the edge as the curtains move away. */
+#photobooth-root.is-curtain-opening .booth-scene::after {
+  opacity: 0;
+}
+
 .booth-scene::after {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 3;
   content: '';
   pointer-events: none;
+  opacity: 1;
   background: radial-gradient(ellipse at center, transparent 48%, rgb(20 4 9 / 16%) 100%);
-}
-
-.booth {
-  z-index: 2;
+  transition: opacity 1.5s ease;
 }
 
 @media (max-width: 48rem) {
@@ -69,8 +125,8 @@
     padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
   }
 
-  .booth-scene__background {
-    object-position: center center;
+  .curtain {
+    background-size: 200% 100%;
   }
 
   .booth-scene::after {
@@ -82,6 +138,14 @@
   .booth-scene {
     padding-left: max(1rem, env(safe-area-inset-left));
     padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .curtain,
+  .booth,
+  .booth-scene::after {
+    transition: none;
   }
 }
 
