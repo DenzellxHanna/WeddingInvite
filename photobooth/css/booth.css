@@ -1,10 +1,11 @@
 /* The approved booth artwork is a real image; CSS only handles interaction layers. */
 .booth {
   position: relative;
-  width: min(94vw, 1100px, calc(88svh * 760 / 671));
+  width: min(94vw, 1100px, calc(88dvh * 760 / 671));
   aspect-ratio: 760 / 671;
   isolation: isolate;
-  filter: drop-shadow(0 1.5rem 2.5rem rgb(42 27 20 / 30%));
+  flex: 0 0 auto;
+  filter: drop-shadow(0 1.5rem 2.5rem rgb(20 4 9 / 42%));
 }
 
 .booth__artwork {
@@ -30,6 +31,7 @@
   border-radius: 50%;
   background: transparent;
   cursor: pointer;
+  touch-action: manipulation;
   transition: transform 120ms ease;
 }
 
@@ -113,15 +115,17 @@
   border: 0;
 }
 
+/* Phones: use the full safe width, while keeping enough vertical room for browser chrome. */
 @media (max-width: 48rem) {
   .booth {
-    width: min(96vw, calc(88dvh * 760 / 671));
+    width: min(96vw, calc((100dvh - 2rem) * 760 / 671));
+    max-width: calc(100vw - 1rem);
   }
 
   .booth__start {
     top: 69.8%;
     left: 21.5%;
-    width: 13%;
+    width: 14%;
   }
 
   .booth__photo-mask {
@@ -129,6 +133,23 @@
     left: 50.8%;
     width: 36%;
     height: 67%;
+  }
+}
+
+/* Short landscape phones need to prioritize height instead of width. */
+@media (max-width: 48rem) and (orientation: landscape) {
+  .booth {
+    width: min(92vw, calc((100dvh - 1rem) * 760 / 671));
+  }
+}
+
+@media (max-width: 22rem) {
+  .booth {
+    width: 96vw;
+  }
+
+  .booth__start {
+    width: 15%;
   }
 }
 
