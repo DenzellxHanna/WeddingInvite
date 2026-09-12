@@ -9,34 +9,7 @@
   height: 100dvh;
   overflow: hidden;
   isolation: isolate;
-  background:
-    radial-gradient(ellipse at 50% 46%, rgb(132 36 54 / 72%) 0%, rgb(105 24 40 / 50%) 30%, transparent 62%),
-    radial-gradient(ellipse at 50% 115%, rgb(30 5 12 / 70%) 0%, transparent 58%),
-    linear-gradient(135deg, #3f0d19 0%, #641b2b 42%, #4b101f 72%, #260710 100%);
-}
-
-.photobooth-stage::before {
-  position: absolute;
-  inset: -15%;
-  z-index: -2;
-  content: '';
-  pointer-events: none;
-  opacity: 0.7;
-  background:
-    radial-gradient(ellipse at 18% 40%, rgb(255 220 210 / 8%) 0%, transparent 18%),
-    radial-gradient(ellipse at 82% 38%, rgb(255 220 210 / 7%) 0%, transparent 20%),
-    repeating-linear-gradient(102deg, rgb(255 255 255 / 2%) 0 7%, transparent 7% 17%);
-  filter: blur(2px);
-  transform: scale(1.08);
-}
-
-.photobooth-stage::after {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  content: '';
-  pointer-events: none;
-  background: radial-gradient(ellipse at center, transparent 40%, rgb(20 4 9 / 38%) 100%);
+  background: #3f0d19;
 }
 
 .booth-scene {
@@ -54,9 +27,32 @@
     max(0.75rem, env(safe-area-inset-left));
 }
 
-/* The background is now CSS-driven so the hero stays lightweight and crops cleanly on phones. */
+/* The uploaded velvet curtain is the real landing-page background. */
 .booth-scene__background {
-  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Very subtle vignette only; it does not replace or tint the uploaded artwork. */
+.booth-scene::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: '';
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 48%, rgb(20 4 9 / 16%) 100%);
+}
+
+.booth {
+  z-index: 2;
 }
 
 @media (max-width: 48rem) {
@@ -73,12 +69,12 @@
     padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
   }
 
-  .photobooth-stage::before {
-    opacity: 0.55;
+  .booth-scene__background {
+    object-position: center center;
   }
 
-  .photobooth-stage::after {
-    background: radial-gradient(ellipse at center, transparent 34%, rgb(20 4 9 / 32%) 100%);
+  .booth-scene::after {
+    background: radial-gradient(ellipse at center, transparent 40%, rgb(20 4 9 / 12%) 100%);
   }
 }
 
