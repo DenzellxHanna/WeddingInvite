@@ -1,146 +1,229 @@
-/* Compact physical invitation panel inspired by the supplied reference. */
+/* Physical reveal box: burgundy + navy + ivory + champagne. */
 .booth {
   position: relative;
-  width: min(88vw, 34rem);
+  width: min(88vw, 36rem);
   aspect-ratio: 1.18 / 1;
   isolation: isolate;
+  filter: drop-shadow(0 1.6rem 2.4rem rgb(20 18 16 / 32%));
 }
 
 .booth__frame {
   position: absolute;
   inset: 0;
-  padding: clamp(0.65rem, 2vw, 1rem);
-  background: linear-gradient(135deg, #f7f4ed, #d8c29d 48%, #f5f1e8);
-  border: 1px solid rgb(98 75 42 / 45%);
-  box-shadow: 0 1.4rem 3rem rgb(25 30 38 / 28%), inset 0 0 0 1px rgb(255 255 255 / 80%);
+  padding: clamp(0.55rem, 1.7vw, 0.9rem);
+  background: linear-gradient(135deg, #e9d9bc, var(--champagne) 45%, #b99865 72%, #eadbbf);
+  border: 1px solid rgb(70 49 27 / 65%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 75%), inset 0 0 1.5rem rgb(77 49 20 / 14%);
 }
 
 .booth__inner {
+  position: relative;
   display: grid;
-  grid-template-columns: 0.82fr 1.18fr;
-  gap: clamp(0.45rem, 1.8vw, 0.85rem);
+  grid-template-columns: 0.86fr 1.14fr;
+  gap: clamp(0.45rem, 1.4vw, 0.8rem);
   height: 100%;
-  padding: clamp(0.7rem, 2vw, 1.1rem);
-  background: var(--ivory);
-  border: 1px solid rgb(114 47 62 / 28%);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 70%);
+  padding: clamp(0.55rem, 1.6vw, 0.9rem);
+  background: var(--burgundy);
+  border: 1px solid rgb(255 255 255 / 38%);
+  box-shadow: inset 0 0 0 1px rgb(42 16 22 / 60%);
+}
+
+.booth__inner::before {
+  position: absolute;
+  inset: 0.3rem;
+  border: 1px solid rgb(216 194 157 / 45%);
+  content: '';
+  pointer-events: none;
 }
 
 .booth__instruction {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-width: 0;
-  padding: 0.75rem;
+  padding: clamp(0.65rem, 1.8vw, 1rem);
   text-align: center;
-  border: 1px solid rgb(216 194 157 / 75%);
-  background: linear-gradient(#f8f5ef, #eee9df);
+  background: var(--ivory);
+  border: 1px solid rgb(216 194 157 / 85%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 75%);
+}
+
+.booth__eyebrow,
+.booth__footer,
+.booth__date {
+  margin: 0;
+  font-family: var(--font-accent);
+  letter-spacing: 0.22em;
 }
 
 .booth__eyebrow {
-  margin: 0 0 clamp(0.7rem, 2vw, 1rem);
   color: var(--burgundy);
-  font: 600 clamp(0.65rem, 1.7vw, 0.82rem)/1 var(--font-accent);
-  letter-spacing: 0.28em;
+  font-size: clamp(0.52rem, 1.4vw, 0.7rem);
+  font-weight: 600;
+}
+
+.booth__initials {
+  display: flex;
+  align-items: center;
+  gap: 0.15em;
+  margin: clamp(0.55rem, 1.6vw, 0.8rem) 0;
+  color: var(--navy);
+  font: 500 clamp(2.2rem, 6vw, 3.2rem)/0.9 var(--font-primary);
+}
+
+.booth__initials i {
+  color: var(--champagne);
+  font-size: 0.62em;
+  font-style: normal;
+}
+
+.booth__rule,
+.booth__window-rule {
+  width: 2.4rem;
+  height: 1px;
+  background: var(--champagne);
 }
 
 .booth__prompt {
-  margin: 0;
-  color: var(--navy);
-  font: 500 clamp(1rem, 3.5vw, 1.55rem)/1.2 var(--font-primary);
-  letter-spacing: 0.08em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12em;
+  margin: clamp(0.65rem, 1.8vw, 0.9rem) 0;
+  color: var(--burgundy);
+  font: 500 clamp(0.8rem, 2.4vw, 1.15rem)/1.18 var(--font-primary);
+  letter-spacing: 0.13em;
 }
 
-.booth__rule {
-  width: 2.5rem;
-  height: 1px;
-  margin: clamp(0.7rem, 2vw, 1rem) 0;
-  background: var(--champagne);
+.booth__prompt-line,
+.booth__footer-line,
+.booth__window-title-line {
+  display: block;
 }
 
 .booth__start {
   position: relative;
   display: grid;
-  width: clamp(2.8rem, 7vw, 3.6rem);
+  width: clamp(2.7rem, 6.8vw, 3.5rem);
   aspect-ratio: 1;
   padding: 0;
   place-items: center;
-  border: 1px solid #8c7650;
+  border: 1px solid #80633b;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #fffdf8, #d8c29d 62%, #a58b60);
-  box-shadow: 0 0.3rem 0.45rem rgb(0 0 0 / 25%), inset 0 0.1rem 0.15rem rgb(255 255 255 / 80%);
+  background: radial-gradient(circle at 34% 28%, #fffdf8 0%, #ddc79f 44%, #a47e49 100%);
+  box-shadow: 0 0.35rem 0.55rem rgb(0 0 0 / 27%), inset 0 0.12rem 0.2rem rgb(255 255 255 / 75%);
   cursor: pointer;
   transition: transform 120ms ease, box-shadow 120ms ease;
 }
 
 .booth__button-core {
-  width: 38%;
+  width: 39%;
   aspect-ratio: 1;
+  border: 1px solid rgb(255 255 255 / 35%);
   border-radius: 50%;
   background: var(--burgundy);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 35%);
+  box-shadow: inset 0 0.08rem 0.15rem rgb(0 0 0 / 25%);
 }
 
 .booth__start:hover { transform: translateY(-1px); }
 .booth__start:active,
 .booth__start.is-pressed {
   transform: translateY(0.16rem) scale(0.96);
-  box-shadow: 0 0.1rem 0.2rem rgb(0 0 0 / 28%), inset 0 0.12rem 0.2rem rgb(0 0 0 / 22%);
+  box-shadow: 0 0.08rem 0.18rem rgb(0 0 0 / 28%), inset 0 0.12rem 0.2rem rgb(0 0 0 / 25%);
 }
 
 .booth__start:focus-visible {
-  outline: 2px solid var(--burgundy);
-  outline-offset: 0.25rem;
+  outline: 2px solid var(--navy);
+  outline-offset: 0.22rem;
+}
+
+.booth__footer {
+  margin-top: clamp(0.7rem, 1.7vw, 0.9rem);
+  color: var(--navy);
+  font-size: clamp(0.42rem, 1.2vw, 0.58rem);
+  font-weight: 500;
 }
 
 .booth__window {
   position: relative;
+  min-width: 0;
   overflow: hidden;
-  border: 0.3rem solid #cdb88f;
-  background: linear-gradient(135deg, #e7e1d5, #fffdf8 45%, #cfc6b7);
-  box-shadow: inset 0 0 0 1px #81704f, inset 0 0 2rem rgb(58 53 45 / 14%);
+  background: var(--navy);
+  border: clamp(0.16rem, 0.5vw, 0.28rem) solid #b8935c;
+  box-shadow: inset 0 0 0 1px #e4c995, inset 0 0 2.5rem rgb(0 0 0 / 22%);
 }
 
+/* No internal light: this is a dark, empty physical compartment. */
 .booth__window::before {
   position: absolute;
   inset: 0.3rem;
-  border: 1px solid rgb(114 47 62 / 20%);
+  border: 1px solid rgb(216 194 157 / 25%);
   content: '';
-}
-
-.booth__window-light {
-  position: absolute;
-  inset: 15% 14%;
-  background: radial-gradient(ellipse at 50% 25%, rgb(255 255 255 / 80%), transparent 62%);
 }
 
 .booth__window-content {
   position: absolute;
-  inset: 0;
+  inset: 16% 8% 16%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  color: var(--burgundy);
-  font: 500 clamp(1.2rem, 4vw, 2rem)/1 var(--font-primary);
-  opacity: 0.3;
+  gap: clamp(0.55rem, 1.6vw, 0.9rem);
+  color: var(--champagne);
+  text-align: center;
+  font-family: var(--font-primary);
 }
 
-.booth__window-content i { color: var(--navy); font-style: normal; }
+.booth__window-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  margin: 0;
+  font-size: clamp(0.72rem, 2vw, 1rem);
+  letter-spacing: 0.2em;
+}
+
+.booth__date {
+  color: var(--light-gray);
+  font-size: clamp(0.4rem, 1.1vw, 0.55rem);
+  font-weight: 500;
+}
+
+/* Realistic physical opening where the photograph will emerge. */
+.booth__photo-slot {
+  position: absolute;
+  top: 0.85rem;
+  left: 50%;
+  width: min(58%, 12rem);
+  height: clamp(0.34rem, 0.9vw, 0.55rem);
+  transform: translateX(-50%);
+  overflow: hidden;
+  border: 1px solid #9a7544;
+  border-radius: 1px;
+  background: #08090b;
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 75%), 0 1px 0 rgb(255 255 255 / 12%);
+}
+
+.booth__slot-shadow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(0 0 0 / 85%), rgb(28 29 30 / 80%));
+}
 
 .booth__ornament {
   position: absolute;
-  z-index: 2;
-  width: 1rem;
-  height: 1rem;
-  border: 1px solid rgb(114 47 62 / 45%);
+  z-index: 3;
+  width: clamp(0.8rem, 2vw, 1.15rem);
+  height: clamp(0.8rem, 2vw, 1.15rem);
+  border: 1px solid rgb(216 194 157 / 72%);
 }
 
-.booth__ornament--tl { top: 0.35rem; left: 0.35rem; border-right: 0; border-bottom: 0; }
-.booth__ornament--tr { top: 0.35rem; right: 0.35rem; border-left: 0; border-bottom: 0; }
-.booth__ornament--bl { bottom: 0.35rem; left: 0.35rem; border-right: 0; border-top: 0; }
-.booth__ornament--br { right: 0.35rem; bottom: 0.35rem; border-left: 0; border-top: 0; }
+.booth__ornament--tl { top: 0.3rem; left: 0.3rem; border-right: 0; border-bottom: 0; }
+.booth__ornament--tr { top: 0.3rem; right: 0.3rem; border-left: 0; border-bottom: 0; }
+.booth__ornament--bl { bottom: 0.3rem; left: 0.3rem; border-right: 0; border-top: 0; }
+.booth__ornament--br { right: 0.3rem; bottom: 0.3rem; border-left: 0; border-top: 0; }
 
 .booth__sr-only {
   position: absolute;
@@ -155,7 +238,7 @@
 }
 
 @media (max-width: 30rem) {
-  .booth { width: 92vw; }
-  .booth__inner { grid-template-columns: 0.88fr 1.12fr; padding: 0.55rem; }
+  .booth { width: 94vw; }
+  .booth__inner { grid-template-columns: 0.9fr 1.1fr; gap: 0.35rem; padding: 0.45rem; }
   .booth__instruction { padding: 0.45rem; }
 }
