@@ -54,7 +54,7 @@ export function createPhotobooth(root) {
             <section class="booth" aria-labelledby="couple-name">
               <img
                 class="booth__artwork"
-                src="./photobooth/assets/images/booth/photobooth-without background.png"
+                src="./photobooth/assets/images/booth/photobooth-without-background.png"
                 alt="Elegant burgundy and navy wedding invitation reveal box"
               />
 
