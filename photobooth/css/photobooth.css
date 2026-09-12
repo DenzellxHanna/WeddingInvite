@@ -1,6 +1,5 @@
-/* Photobooth layout and local state styles only. */
 #photobooth-root[data-system='photobooth'] {
-  min-height: 100vh;
+  min-height: 100svh;
   overflow: hidden;
 }
 
@@ -9,18 +8,38 @@
   display: grid;
   min-height: 100svh;
   place-items: center;
-  padding: clamp(1.5rem, 5vw, 4rem) 1rem;
+  overflow: hidden;
   isolation: isolate;
+  background:
+    radial-gradient(circle at 8% 16%, rgb(114 47 62 / 28%) 0 2.5rem, transparent 2.7rem),
+    radial-gradient(circle at 13% 24%, rgb(114 47 62 / 22%) 0 1.8rem, transparent 2rem),
+    radial-gradient(circle at 5% 31%, rgb(36 59 90 / 26%) 0 2.2rem, transparent 2.4rem),
+    radial-gradient(circle at 93% 24%, rgb(114 47 62 / 25%) 0 2.8rem, transparent 3rem),
+    radial-gradient(circle at 88% 32%, rgb(36 59 90 / 25%) 0 2rem, transparent 2.2rem),
+    radial-gradient(circle at 96% 45%, rgb(114 47 62 / 20%) 0 2.4rem, transparent 2.6rem),
+    radial-gradient(circle at 50% 44%, rgb(255 255 255 / 72%), transparent 42rem),
+    linear-gradient(180deg, #e7d6c0 0%, #efe4d4 48%, #d7c0a6 100%);
 }
 
 .photobooth-stage::before {
   position: absolute;
-  z-index: -1;
   inset: 0;
-  background:
-    radial-gradient(circle at 50% 28%, rgb(255 255 255 / 55%), transparent 35rem),
-    radial-gradient(ellipse at center, transparent 45%, rgb(114 47 62 / 7%) 130%);
+  z-index: -1;
   content: '';
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 8% 55%, rgb(114 47 62 / 18%) 0 5rem, transparent 5.2rem),
+    radial-gradient(ellipse at 92% 58%, rgb(36 59 90 / 17%) 0 5rem, transparent 5.2rem),
+    linear-gradient(180deg, transparent 70%, rgb(74 47 30 / 15%) 100%);
+  filter: blur(0.4px);
+}
+
+.photobooth-stage::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 42%, rgb(46 29 24 / 20%) 100%);
 }
 
 .photobooth-status {
@@ -30,6 +49,13 @@
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+@media (max-width: 30rem) {
+  .photobooth-stage {
+    min-height: 100dvh;
+    padding: 1rem;
+  }
 }
 
 @media (min-width: 48rem) {
