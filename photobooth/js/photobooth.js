@@ -1,13 +1,11 @@
 import { revealPhoto } from './animations.js';
 
-/** Play a short, tactile mechanical push-button sound. */
 function playButtonPressSound() {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   if (!AudioContext) return;
 
   const context = new AudioContext();
   const now = context.currentTime;
-
   const click = context.createOscillator();
   const clickGain = context.createGain();
   click.type = 'square';
@@ -35,7 +33,6 @@ function playButtonPressSound() {
   window.setTimeout(() => context.close(), 120);
 }
 
-/** Public entry point for the photobooth landing interaction. */
 export function createPhotobooth(root) {
   return {
     mount() {
@@ -44,6 +41,15 @@ export function createPhotobooth(root) {
       root.innerHTML = `
         <div class="photobooth-stage scene-camera">
           <div class="booth-scene" aria-label="Wedding invitation reveal">
+            <div class="next-scene" aria-hidden="true">
+              <img
+                class="next-scene__artwork"
+                src="./photobooth/assets/images/booth/behind-curtain.png"
+                alt=""
+                onerror="this.hidden = true"
+              />
+            </div>
+
             <div class="curtain curtain--left" aria-hidden="true"></div>
             <div class="curtain curtain--right" aria-hidden="true"></div>
 
@@ -85,19 +91,25 @@ export function createPhotobooth(root) {
         status.textContent = 'Photo reveal started.';
         revealPhoto(root);
 
-        // At 5 seconds, begin a slow five-second transition out of the booth.
         window.setTimeout(() => {
           root.dataset.state = 'transitioning';
           root.classList.add('is-transitioning');
           status.textContent = 'The scene is changing.';
         }, 5000);
 
-        // At 10 seconds, open the velvet curtains and reveal the next scene.
         window.setTimeout(() => {
           root.dataset.state = 'curtain-opening';
           root.classList.add('is-curtain-opening');
           status.textContent = 'The curtains are opening.';
         }, 10000);
+
+        // The curtain animation runs for 5 seconds. Only after it is fully open
+        // does main.js hand control to the album module.
+        window.setTimeout(() => {
+          root.dataset.state = 'curtain-open';
+          window.dispatchEvent(new CustomEvent('photobooth:curtain-open'));
+          status.textContent = 'The wedding album is arriving.';
+        }, 15000);
 
         window.setTimeout(() => {
           photo?.classList.add('is-settled');
